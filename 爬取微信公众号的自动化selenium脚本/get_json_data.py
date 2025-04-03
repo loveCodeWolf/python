@@ -10,6 +10,7 @@ def random_sleep(min_seconds=1, max_seconds=3):
     """随机延时函数"""
     sleep_time = random.uniform(min_seconds, max_seconds)
     print(f"随机等待 {sleep_time:.2f} 秒...")
+    # 进行暂停的操作
     time.sleep(sleep_time)
 
 def fetch_wechat_articles():
@@ -67,7 +68,7 @@ def fetch_wechat_articles():
                 print(f"请求失败，状态码: {response.status_code}")
                 break
             
-            # 解析响应数据
+            # 解析响应数据 这里直接解析成json因为就是一个json的数据接口
             data = response.json()
             
             # 检查是否成功
@@ -135,7 +136,7 @@ def fetch_wechat_articles():
     """
     - os.path.abspath() 函数将路径转换为绝对路径，解决可能存在的相对路径问题。这确保了无论从哪里调用这个脚本，都能获得正确的完整路径。
     - os.path.dirname() 函数从文件的完整路径中提取出目录部分，去掉文件名。"""
-    output_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.dirname(os.path.abspath(__file__))  #直接读取当前文件的绝对路径，给之后的文件操作进行拼接
     output_file = os.path.join(output_dir, "虾谷龙虾报价_articles.csv")  ##保存为csv文件
     
     with open(output_file, 'w', newline='', encoding='utf-8-sig') as f:

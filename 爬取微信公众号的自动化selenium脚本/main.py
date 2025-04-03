@@ -73,19 +73,22 @@ def get_article_links(keyword, max_page=10):
             # 遍历每个img-box，提取a标签中的链接
             for box in img_boxes:
                 try:
-                    # 获取a标签
+                    # 使用find_element方法获取第一个a标签，因为img-box的兄弟元素中通常包含a标签
+                    #这里的By.TAG_NAME用于直接获取<a><div><span>等的标签
                     a_tag = box.find_element(By.TAG_NAME, "a")
                     
-                    # 提取href属性
+                    # 直接获取标签的属性值
                     href = a_tag.get_attribute("href")
                     
                     # 提取文章标题
                     # 找到相关的标题元素 (通常在img-box的兄弟元素中)
-                    parent_li = box.find_element(By.XPATH, "./..")
+                    # By.XPATH：适合需要精确控制层级关系或复杂条件的场景。
+                    parent_li = box.find_element(By.XPATH, "./..") #这里是通过xpath语法找到当前元素的父元素，然后通过find_element找到第一个匹配的元素
                     title_element = parent_li.find_element(By.CSS_SELECTOR, "h3 a")
                     title = title_element.text
                     
                     # 提取发布时间和公众号名称
+                    #By.CSS_SELECTOR 用于定位 div.img-box 和 h3 a 等元素。
                     info_element = parent_li.find_element(By.CSS_SELECTOR, "div.s-p")
                     account = info_element.find_element(By.CSS_SELECTOR, "span.all-time-y2").text
                     
