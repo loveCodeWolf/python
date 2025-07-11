@@ -1,0 +1,795 @@
+<html lang="zh"><head>
+    <style type="text/css" id="AMap_Dynamic_style">.amap-custom{top:0;left:0;position:absolute}.amap-container img{max-width:none!important;max-height:none!important}.amap-container{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACC2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDx0aWZmOkNvbXByZXNzaW9uPjE8L3RpZmY6Q29tcHJlc3Npb24+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgICAgIDx0aWZmOlBob3RvbWV0cmljSW50ZXJwcmV0YXRpb24+MjwvdGlmZjpQaG90b21ldHJpY0ludGVycHJldGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KD0UqkwAAAf1JREFUeAHtmtGpAkEQBE9TMAi/zMb8MzCGU/97Ye8QunDrfQ7qNFUMS8Pbtom/fd8fEx/b/FymdIDL85p/wmmLgEJa5Ad7FTIA0xorpEV+sFchAzCtsUJa5Ad7FTIA0xorpEV+sPcyW1oG33f8WwL3qZ+blebnMs4DXGzqGWFv6hvSYx83KyRi6Q0V0mMfNyskYukNFdJjHzcrJGLpDRXSYx8329QjltrQpp7QH2jWv/5fA5t6EtKc+YY06YfdCglQmiOFNOmH3QoJUJojhTTph90KCVCaI4U06YfdNvUApTiyqSf4NvVEZdGZbwhMvEIUAiMAi+OFKARGABbHC1EIjAAsjk2dJcSmnnzY1BOVRWc+6jDxClEIjAAsjheiEBgBWBwvRCEwArA4/9LUbx+uLxjbM3Fs6omaTT1RWXTmow4TrxCFwAjA4nghCoERgMXxQhQCIwCL8y9NHYb1dBybekJnU09UFp35qMPEK0QhMAKwOF6IQmAEYHG8EIXACMDi2NRZQmzqyYdNPVFZdOajDhOvEIXACMDieCEKgRGAxfFCFAIjAItjU2cJsaknHzb1RGXRmY86TLxCFAIjAIvjhSgERgAWxwtRCIwALI5NnSXEpp582NQTlUVnPuow8QpRCIwALI4XohAYAVgcL0QhMAKwON+m/oRlWjrOG2SeYNIaKe7fAAAAAElFTkSuQmCC);background-color:#f1f1f1;touch-action:none;position:relative;overflow:hidden;-ms-touch-action:none}.amap-drags,.amap-layers{width:100%;height:100%;position:absolute;overflow:hidden;transform:translateZ(0)}.amap-layers canvas{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.amap-layers .amap-layer-tile{transform:translateZ(0)}.amap-layers .amap-layer-tile,.amap-layers .amap-layer-tile img{position:absolute;top:0;left:0;user-select:none;-webkit-user-select:none}.amap-layers .amap-layer-image{position:absolute;top:0;left:0;transform:translateZ(0)}.amap-layers .amap-layer-image img{position:absolute;top:0;left:0}.amap-layer img{pointer-events:none;display:block}.amap-layers .amap-layer-overlay{position:absolute;top:0;left:0;transform:translateZ(0)}.amap-e,.amap-maps{width:100%;height:100%;outline:none}.amap-maps{z-index:0}.amap-e,.amap-layers,.amap-maps,.amap-tile-container{position:absolute;left:0;top:0;overflow:hidden}.amap-context,.amap-marker,.amap-markers,.amap-overlays{position:absolute;left:0;top:0}.amap-layers{z-index:0}.amap-overlays{z-index:110;cursor:default}.amap-markers{z-index:120}.amap-controls{z-index:150}.amap-copyright{display:block!important;left:85px;height:16px;bottom:1.8px;line-height:1.5;padding-bottom:2px;font-size:11px;font-family:Arial,sans-serif}.amap-copyright,.amap-logo{position:absolute;z-index:160;user-select:none;-webkit-user-select:none}.amap-logo{bottom:1.5px;left:4px;height:20px}.amap-logo img{width:73px!important;height:20px!important;border:none;vertical-align:baseline!important;user-select:none;-webkit-user-select:none}.amap-icon{position:relative;z-index:1}.amap-icon img{position:absolute;z-index:-1}.amap-marker-label{position:absolute;z-index:2;border:1px solid #00f;background-color:#fff;white-space:nowrap;cursor:default;padding:3px;font-size:12px;line-height:14px}.amap-info{left:0;width:fit-content;width:-webkit-fit-content;width:-moz-max-content}.amap-info,.amap-menu{position:absolute;z-index:140}.amap-info-close{position:absolute;right:5px;top:5px;color:#c3c3c3;text-decoration:none;font:700 16px/14px Tahoma,Verdana,sans-serif;width:14px;height:14px;cursor:pointer}.amap-info-outer,.amap-menu-outer{box-shadow:0 1px 2px rgba(0,0,0,.1);background:none repeat scroll 0 0 #fff;border-radius:2px;padding:1px;text-align:left}.amap-info-contentContainer:hover .amap-info-outer,.amap-menu-outer:hover{box-shadow:0 1px 2px rgba(0,0,0,.3)}.amap-info-content{position:relative;background:#fff;padding:10px 18px 10px 10px;line-height:1.4;overflow:auto}.amap-marker-content{position:relative}.amap-info-sharp-old{overflow:hidden;position:absolute;background-image:url(https://webapi.amap.com/images/arrows.png)}.bottom-center .amap-info-sharp-old{height:12px;width:20px;background-position:center 12px;top:100%;left:50%;margin:-9px auto 0 -10px}.bottom-left .amap-info-sharp-old{height:12px;width:13px;background-position:-16px -46px;top:100%;margin-top:-9px}.bottom-right .amap-info-sharp-old{height:12px;width:13px;top:-1px;background-position:-56px -46px;left:100%;margin-left:-13px;top:100%;margin-top:-9px}.middle-left .amap-info-sharp-old{height:20px;width:12px;background-position:0;top:50%;margin-top:-10px;margin-left:-11px}.center .amap-info-sharp-old{display:none}.middle-right .amap-info-sharp-old{height:20px;margin-right:0;width:12px;background-position:100%;left:100%;margin-left:-9px;top:50%;margin-top:-10px}.top-center .amap-info-sharp-old{height:12px;width:20px;background-position:top;top:0;left:50%;margin:-3px auto 0 -10px}.top-left .amap-info-sharp-old{height:12px;width:13px;background-position:-16px -3px;top:0;margin-top:-3px}.top-right .amap-info-sharp-old{height:12px;width:13px;background-position:-56px -3px;left:100%;margin-left:-13px;top:0;margin-top:-3px}.amap-info-sharp{position:absolute}.bottom-center .amap-info-sharp{bottom:0;left:50%;border-top:8px solid #fff}.bottom-center .amap-info-sharp,.bottom-center .amap-info-sharp:after{margin-left:-8px;border-left:8px solid transparent;border-right:8px solid transparent}.bottom-center .amap-info-sharp:after{position:absolute;content:"";margin-top:-7px;border-top:8px solid rgba(0,0,0,.3);filter:blur(2px);z-index:-1}.amap-info-contentContainer:hover.bottom-center .amap-info-sharp:after{border-top:8px solid rgba(0,0,0,.5)}.bottom-left .amap-info-sharp{border-color:transparent #fff;border-style:solid;border-width:0 0 10px 10px}.bottom-left .amap-info-sharp:after{position:absolute;content:"";margin-left:-10px;border-color:transparent rgba(0,0,0,.3);border-style:solid;border-width:0 0 10px 10px;filter:blur(1px);z-index:-1}.amap-info-contentContainer:hover.bottom-left .amap-info-sharp:after{border-color:transparent rgba(0,0,0,.5)}.bottom-left .amap-info-content{border-radius:2px 2px 2px 0}.bottom-right .amap-info-sharp{right:0;border-top:10px solid #fff;border-left:10px solid transparent}.bottom-right .amap-info-sharp:after{position:absolute;margin-top:-9px;margin-left:-10px;content:"";border-top:10px solid rgba(0,0,0,.3);border-left:10px solid transparent;filter:blur(1px);z-index:-1}.amap-info-contentContainer:hover.bottom-right .amap-info-sharp:after{border-top:10px solid rgba(0,0,0,.5)}.bottom-right .amap-info-content{border-radius:2px 2px 0 2px}.top-center .amap-info-sharp{top:0;left:50%;border-bottom:8px solid #fff}.top-center .amap-info-sharp,.top-center .amap-info-sharp:after{margin-left:-8px;border-left:8px solid transparent;border-right:8px solid transparent}.top-center .amap-info-sharp:after{position:absolute;content:"";margin-top:0;border-bottom:8px solid rgba(0,0,0,.3);filter:blur(1px);z-index:-1}.top-left .amap-info-sharp{left:0;top:0;border-bottom:10px solid #fff;border-right:10px solid transparent}.top-left .amap-info-sharp:after{position:absolute;content:"";margin-top:0;margin-left:0;border-bottom:10px solid rgba(0,0,0,.3);border-right:10px solid transparent;filter:blur(1px);z-index:-1}.top-right .amap-info-sharp{right:0;top:0;border-bottom:10px solid #fff;border-left:10px solid transparent}.top-right .amap-info-sharp:after{position:absolute;content:"";margin-top:0;margin-left:-10px;border-bottom:10px solid rgba(0,0,0,.3);border-left:10px solid transparent;filter:blur(1px);z-index:-1}.middle-right .amap-info-sharp{right:0;top:50%;border-left:8px solid #fff}.middle-right .amap-info-sharp,.middle-right .amap-info-sharp:after{margin-top:-8px;border-top:8px solid transparent;border-bottom:8px solid transparent}.middle-right .amap-info-sharp:after{position:absolute;content:"";margin-left:-8px;border-left:8px solid rgba(0,0,0,.3);filter:blur(1px);z-index:-1}.amap-info-contentContainer:hover.middle-right .amap-info-sharp:after{border-left:8px solid rgba(0,0,0,.5)}.middle-left .amap-info-sharp{left:0;top:50%;border-right:8px solid #fff}.middle-left .amap-info-sharp,.middle-left .amap-info-sharp:after{margin-top:-8px;border-top:8px solid transparent;border-bottom:8px solid transparent}.middle-left .amap-info-sharp:after{position:absolute;content:"";margin-left:0;border-right:8px solid rgba(0,0,0,.3);filter:blur(1px);z-index:-1}.amap-info-contentContainer:hover.middle-left .amap-info-sharp:after{border-right:8px solid rgba(0,0,0,.5)}.amap-info-contentContainer.top-center,.amap-info-contentContainer.top-left,.amap-info-contentContainer.top-right{padding-top:8px}.amap-info-contentContainer.bottom-center,.amap-info-contentContainer.bottom-left,.amap-info-contentContainer.bottom-right{padding-bottom:8px}.amap-info-contentContainer.middle-right{padding-right:8px}.amap-info-contentContainer.middle-left{padding-left:8px}.amap-menu-outer{margin:0;padding:0;list-style-type:none}ul.amap-menu-outer li{height:35px;line-height:35px;word-break:break-all;padding:0 10px;font-size:12px;white-space:nowrap}ul.amap-menu-outer li a{text-decoration:none;font-size:13px;margin:0 5px;color:#000;padding:5px}ul.amap-menu-outer li:hover{background-color:#f3f3ee}.amap-overlay-text-container{display:block;width:auto;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff;padding:2px 3px;border:1px solid #ccc;border-radius:3px}.amap-overlay-text-container.amap-overlay-text-empty{display:none}.amap-info-content-ie8{border:1px solid #9c9c9c}.amap-control{position:absolute;-webkit-tap-highlight-color:transparent}.amap-toolbar{background-color:#fff;border-radius:4px;box-shadow:0 0 3px rgba(0,0,0,.5)}.amap-toolbar span{display:block;width:30px;height:30px;line-height:30px;text-align:center;border-radius:0 0 4px 4px;-webkit-user-select:none;-moz-user-select:none;user-select:none;font-size:20px}.amap-toolbar span:first-child{border-bottom:1px solid #eee;border-radius:4px 4px 0 0}.amap-toolbar span:hover{font-weight:bolder;background-color:#f0f0f0}.amap-scalecontrol{pointer-events:none;background-color:hsla(0,0%,100%,.5);border-radius:2px;user-select:none}.amap-scalecontrol .amap-scale-text{font-size:10px;text-align:center;transition:width .3s;user-select:none}.amap-scalecontrol .amap-scale-line{position:relative;height:8px;left:2px;user-select:none}.amap-scalecontrol .amap-scale-edgeleft,.amap-scalecontrol .amap-scale-edgeright,.amap-scalecontrol .amap-scale-middle{position:absolute;background-color:#333;overflow:hidden;box-sizing:content-box!important}.amap-scalecontrol .amap-scale-edgeright{width:1px;height:6px;border:1px solid #fff;transition:left .3s}.amap-scalecontrol .amap-scale-middle{height:2px;left:2px;top:2px;border-top:1px solid #fff;border-bottom:1px solid #fff;transition:width .3s}.amap-scalecontrol .amap-scale-edgeleft{width:1px;height:6px;border:1px solid #fff}.amap-controlbar,.amap-controlbar *{user-select:none}.amap-controlbar .amap-luopan{width:92px;height:92px;background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) -22px -30px no-repeat;background-size:348px 270px;user-select:none}.amap-luopan .amap-compass{top:46px;left:50%;position:absolute;margin:-24px;width:48px;height:48px;z-index:10;background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) -231px -26px no-repeat;background-size:348px 270px}.amap-luopan .amap-compass.amap-compass-black{background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) no-repeat -231px -79px;background-size:348px 270px}.amap-luopan .amap-compass .amap-pointers{position:absolute;width:30px;height:48px;top:0;left:9px;border:none;z-index:2;background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) -281px -26px no-repeat;background-size:348px 270px}.amap-pitchDown,.amap-pitchUp{width:30px;height:25.5px;position:absolute;top:3.5px;margin-left:-15px;left:50%;z-index:1;background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) -302.5px -49px no-repeat;background-size:348px 270px}.amap-pitchDown:hover,.amap-pitchUp:hover{background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) no-repeat -302.5px -23.5px;background-size:348px 270px}.amap-pitchDown{top:66px;transform:rotate(180deg);-ms-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);-moz-transform:rotate(180deg)}.amap-rotateLeft,.amap-rotateRight{width:21px;height:52px;top:19px;position:absolute;z-index:2;background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) -301.5px -77px no-repeat;background-size:348px 270px}.amap-rotateLeft:hover,.amap-rotateRight:hover{background:url(https://webapi.amap.com/theme/v1.3/controlbar/ctb.png) no-repeat -278.5px -76.5px;background-size:348px 270px}.amap-rotateLeft{left:5px}.amap-rotateRight{right:5px;transform:rotateY(180deg);-ms-transform:rotateY(180deg);-webkit-transform:rotateY(180deg);-o-transform:rotateY(180deg);-moz-transform:rotateY(180deg)}.amap-ctrl-icon-layer{width:30px;height:30px}.amap-ctrl-icon-layer,.amap-ctrl-list-layer{background-color:#fff;border-radius:3px;box-shadow:0 0 4px 1px rgba(0,0,0,.2)}.amap-ctrl-list-layer{position:absolute;top:0;right:0;overflow:hidden;z-index:1}.amap-ctrl-list-layer ul{overflow:hidden;list-style:none;margin:0;padding:5px 8px}.amap-ctrl-list-layer ul li{float:left;width:100%}.amap-ctrl-list-layer ul p{white-space:nowrap;font-size:12px;height:20px;line-height:20px;padding-left:5px;margin:0 10px}.amap-ctrl-list-layer input{float:left;height:20px;width:12px;margin:0 5px}.amap-ctrl-base-layer{border-bottom:1px solid #eee}.amap-ranging-label{_width:10px;font-size:12px;line-height:14px;background:#fff;border:1px solid #ccc;padding:3px 7px 3px 2px;white-space:nowrap}.amap-ranging-label span{height:12px;vertical-align:center;display:inline-block;white-space:nowrap;margin-left:5px}.amap-popup{text-align:center;position:fixed;top:50%;left:50%;margin-left:-165px;margin-top:-170px}.amap-popup-content{vertical-align:middle;line-height:200px;overflow:hidden;background-color:#fff;border:solid;border-width:3px 1px;border-radius:5px;border-color:#ddf;margin:0 auto;text-align:center;height:340px}.amap-labellayers{position:absolute;top:0;left:0;transform-origin:0 0}.amap-indoormap-floorbar-control{position:absolute;width:40px;text-align:center;line-height:1.3em;border-radius:20px;box-shadow:0 0 3px 3px rgba(0,0,0,.1);background-color:#fff;margin-top:-100px}.amap-indoormap-floorbar-control .floor-list-box{max-height:160px;overflow:scroll;-ms-overflow-style:none;overflow:-moz-scrollbars-none;-webkit-user-select:none;-moz-user-select:none}.floor-list-box::-webkit-scrollbar{width:0!important;height:0!important}.amap-indoormap-floorbar-control ul{list-style:none;margin:0;padding:0 4px;width:40px;box-sizing:border-box}.amap-indoormap-floorbar-control ul li{height:32px;width:32px;border-radius:16px}.amap-indoormap-floorbar-control ul li:hover{background-color:#efefef}.amap-indoormap-floorbar-control ul li div{height:32px;text-align:center;line-height:32px;font-size:12px}.amap-indoormap-floorbar-control ul li.selected{color:#fff;background-color:#4196ff}.amap-indoormap-floorbar-control .floor-minus,.amap-indoormap-floorbar-control .floor-plus{height:32px;width:32px;margin:0 auto;border-radius:16px;position:relative}.amap-indoormap-floorbar-control .floor-minus:after,.amap-indoormap-floorbar-control .floor-plus:after{content:"";position:absolute;margin:auto;bottom:4px;left:0;right:0;width:0;height:0;border:7px solid transparent;border-top-color:#777}.amap-indoormap-floorbar-control .floor-plus:after{border-bottom-color:#777;border-top-color:transparent;bottom:11px}.amap-indoormap-floorbar-control .floor-plus:hover:after{border-bottom-color:#222}.amap-indoormap-floorbar-control .floor-minus:hover:after{border-top-color:#222}.amap-indoormap-floorbar-control .floor-plus.disabled:after{border-bottom-color:#ddd}.amap-indoormap-floorbar-control .floor-minus.disabled:after{border-top-color:#ddd}.amap-indoormap-floorbar-control .floor-list-item.selected:after{right:0;left:auto;border-left-color:transparent;border-right-color:#4196ff}.amap-indoormap-floorbar-control .floor-btn.disabled,.amap-indoormap-floorbar-control .floor-btn.disabled *,.amap-indoormap-floorbar-control.with-indrm-loader *{-webkit-pointer-events:none!important;pointer-events:none!important}.amap-indoormap-floorbar-control .with-indrm-loader .floor-nonas{opacity:.5}.amap-logo{display:block!important;pointer-events:none;}</style>
+    <script async="" src="https://g.alicdn.com/??/sd/baxia/2.5.31/baxiaCommon.js" crossorigin="true"></script>
+    <script src="https://g.alicdn.com/AWSC/et/1.83.8/et_f.js" id="AWSC_etModule"></script>
+    <script src="https://g.alicdn.com/??/AWSC/AWSC/awsc.js,/sd/baxia-entry/baxiaCommon.js"></script>
+        <script type="text/javascript">
+          delete window.AMap;
+            window._AMapSecurityConfig = {
+                serviceHost: '//lbs.amap.com/AMapService',
+            }
+        </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京3天旅行攻略</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        .weather-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+            padding: 20px;
+            background-color: #e9f5fb;
+            gap: 15px;
+            overflow-x: auto;
+            height: 160px;
+        }
+
+        .weather-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 0;
+            padding: 10px 15px;
+            width: calc(33% - 10px);
+            min-width: 200px;
+            height: 140px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .forecast-box {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .forecast-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            width: 100%;
+        }
+        .day {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .cards {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0;
+        }
+        .card {
+            flex: 0 0 auto;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .weather {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+        .taxi-link {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-align: center;
+            width: auto;
+            display: inline-block;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .taxi-link a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .taxi-link:hover a {
+            color: #ffeb3b;
+        }
+
+        .taxi-link:hover {
+            background-color: #45a049;
+        }
+
+        .tip-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tip-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .tip-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+<style data-id="immersive-translate-input-injected-css">.immersive-translate-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2147483647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.immersive-translate-attach-loading::after {
+  content: " ";
+
+  --loading-color: #f78fb6;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+  margin: 12px auto;
+  position: relative;
+  color: white;
+  left: -100px;
+  box-sizing: border-box;
+  animation: immersiveTranslateShadowRolling 1.5s linear infinite;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-2000%, -50%);
+  z-index: 100;
+}
+
+.immersive-translate-loading-spinner {
+  vertical-align: middle !important;
+  width: 10px !important;
+  height: 10px !important;
+  display: inline-block !important;
+  margin: 0 4px !important;
+  border: 2px rgba(221, 244, 255, 0.6) solid !important;
+  border-top: 2px rgba(0, 0, 0, 0.375) solid !important;
+  border-left: 2px rgba(0, 0, 0, 0.375) solid !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  -webkit-animation: immersive-translate-loading-animation 0.6s infinite linear !important;
+  animation: immersive-translate-loading-animation 0.6s infinite linear !important;
+}
+
+@-webkit-keyframes immersive-translate-loading-animation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes immersive-translate-loading-animation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.immersive-translate-input-loading {
+  --loading-color: #f78fb6;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+  margin: 12px auto;
+  position: relative;
+  color: white;
+  left: -100px;
+  box-sizing: border-box;
+  animation: immersiveTranslateShadowRolling 1.5s linear infinite;
+}
+
+@keyframes immersiveTranslateShadowRolling {
+  0% {
+    box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0),
+      0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  12% {
+    box-shadow: 100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0),
+      0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  25% {
+    box-shadow: 110px 0 var(--loading-color), 100px 0 var(--loading-color),
+      0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  36% {
+    box-shadow: 120px 0 var(--loading-color), 110px 0 var(--loading-color),
+      100px 0 var(--loading-color), 0px 0 rgba(255, 255, 255, 0);
+  }
+
+  50% {
+    box-shadow: 130px 0 var(--loading-color), 120px 0 var(--loading-color),
+      110px 0 var(--loading-color), 100px 0 var(--loading-color);
+  }
+
+  62% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color),
+      120px 0 var(--loading-color), 110px 0 var(--loading-color);
+  }
+
+  75% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
+      130px 0 var(--loading-color), 120px 0 var(--loading-color);
+  }
+
+  87% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
+      200px 0 rgba(255, 255, 255, 0), 130px 0 var(--loading-color);
+  }
+
+  100% {
+    box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
+      200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.immersive-translate-toast {
+  display: flex;
+  position: fixed;
+  z-index: 2147483647;
+  left: 0;
+  right: 0;
+  top: 1%;
+  width: fit-content;
+  padding: 12px 20px;
+  margin: auto;
+  overflow: auto;
+  background: #fef6f9;
+  box-shadow: 0px 4px 10px 0px rgba(0, 10, 30, 0.06);
+  font-size: 15px;
+  border-radius: 8px;
+  color: #333;
+}
+
+.immersive-translate-toast-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.immersive-translate-toast-hidden {
+  margin: 0 20px 0 72px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.immersive-translate-toast-close {
+  color: #666666;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .immersive-translate-toast {
+    top: 0;
+    padding: 12px 0px 0 10px;
+  }
+  .immersive-translate-toast-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .immersive-translate-toast-hidden {
+    margin: 10px auto;
+  }
+}
+
+.immersive-translate-modal {
+  display: none;
+  position: fixed;
+  z-index: 2147483647;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  font-size: 15px;
+}
+
+.immersive-translate-modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 40px 24px 24px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 270px;
+  font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Ubuntu",
+    "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .immersive-translate-modal-content {
+    margin: 50% auto !important;
+  }
+}
+
+.immersive-translate-modal .immersive-translate-modal-content-in-input {
+  max-width: 500px;
+}
+.immersive-translate-modal-content-in-input .immersive-translate-modal-body {
+  text-align: left;
+  max-height: unset;
+}
+
+.immersive-translate-modal-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+}
+
+.immersive-translate-modal-body {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  word-break: break-all;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .immersive-translate-modal-body {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+}
+
+.immersive-translate-close {
+  color: #666666;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.immersive-translate-close:hover,
+.immersive-translate-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.immersive-translate-modal-footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.immersive-translate-btn {
+  width: fit-content;
+  color: #fff;
+  background-color: #ea4c89;
+  border: none;
+  font-size: 16px;
+  margin: 0 8px;
+  padding: 9px 30px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.immersive-translate-btn:hover {
+  background-color: #f082ac;
+}
+.immersive-translate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.immersive-translate-btn:disabled:hover {
+  background-color: #ea4c89;
+}
+
+.immersive-translate-cancel-btn {
+  /* gray color */
+  background-color: rgb(89, 107, 120);
+}
+
+.immersive-translate-cancel-btn:hover {
+  background-color: hsl(205, 20%, 32%);
+}
+
+.immersive-translate-action-btn {
+  background-color: transparent;
+  color: #ea4c89;
+  border: 1px solid #ea4c89;
+}
+
+.immersive-translate-btn svg {
+  margin-right: 5px;
+}
+
+.immersive-translate-link {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  text-decoration: none;
+  color: #007bff;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+.immersive-translate-primary-link {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  text-decoration: none;
+  color: #ea4c89;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+.immersive-translate-modal input[type="radio"] {
+  margin: 0 6px;
+  cursor: pointer;
+}
+
+.immersive-translate-modal label {
+  cursor: pointer;
+}
+
+.immersive-translate-close-action {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.imt-image-status {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 16px !important;
+}
+.imt-image-status img,
+.imt-image-status svg,
+.imt-img-loading {
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 0 8px 0 !important;
+  min-height: 28px !important;
+  min-width: 28px !important;
+  position: relative !important;
+}
+.imt-img-loading {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAtFBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////oK74hAAAAPHRSTlMABBMIDyQXHwyBfFdDMSw+OjXCb+5RG51IvV/k0rOqlGRM6KKMhdvNyZBz9MaupmxpWyj437iYd/yJVNZeuUC7AAACt0lEQVRIx53T2XKiUBCA4QYOiyCbiAsuuGBcYtxiYtT3f6/pbqoYHVFO5r+iivpo6DpAWYpqeoFfr9f90DsYAuRSWkFnPO50OgR9PwiCUFcl2GEcx+N/YBh6pvKaefHlUgZd1zVe0NbYcQjGBfzrPE8Xz8aF+71D8gG6DHFPpc4a7xFiCDuhaWgKgGIJQ3d5IMGDrpS4S5KgpIm+en9f6PlAhKby4JwEIxlYJV9h5k5nee9GoxHJ2IDSNB0dwdad1NAxDJ/uXDHYmebdk4PdbkS58CIVHdYSUHTYYRWOJblWSyu2lmy3KNFVJNBhxcuGW4YBVCbYGRZwIooipHsNqjM4FbgOQqQqSKQQU9V8xmi1QlgHqQQ6DDBvRUVCDirs+EzGDGOQTCATgtYTnbCVLgsVgRE0T1QE0qHCFAht2z6dLvJQs3Lo2FQoDxWNUiBhaP4eRgwNkI+dAjVOA/kUrIDwf3CG8NfNOE0eiFotSuo+rBiq8tD9oY4Qzc6YJw99hl1wzpQvD7ef2M8QgnOGJfJw+EltQc+oX2yn907QB22WZcvlUpd143dqQu+8pCJZuGE4xCuPXJqqcs5sNpsI93Rmzym1k4Npk+oD1SH3/a3LOK/JpUBpWfqNySxWzCfNCUITuDG5dtuphrUJ1myeIE9bIsPiKrfqTai5WZxbhtNphYx6GEIHihyGFTI69lje/rxajdh0s0msZ0zYxyPLhYCb1CyHm9Qsd2H37Y3lugVwL9kNh8Ot8cha6fUNQ8nuXi5z9/ExsAO4zQrb/ev1yrCB7lGyQzgYDGuxq1toDN/JGvN+HyWNHKB7zEoK+PX11e12G431erGYzwmytAWU56fkMHY5JJnDRR2eZji3AwtIcrEV8Cojat/BdQ7XOwGV1e1hDjGGjXbdArm8uJZtCH5MbcctVX8A1WpqumJHwckAAAAASUVORK5CYII=");
+  background-size: 28px 28px;
+  animation: image-loading-rotate 1s linear infinite !important;
+}
+
+.imt-image-status span {
+  color: var(--bg-2, #fff) !important;
+  font-size: 14px !important;
+  line-height: 14px !important;
+  font-weight: 500 !important;
+  font-family: "PingFang SC", Arial, sans-serif !important;
+}
+
+@keyframes image-loading-rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+</style></head>
+<body>
+    <header>
+        <h1>北京3天旅行攻略</h1>
+    </header>
+    <div class="container">
+        <div class="forecast-box">
+            <div class="forecast-header">天气预报</div>
+            <div class="weather-container">
+                <div class="weather-card">
+                    <h3>2025-05-31</h3>
+                    <p>白天温度：26°C</p>
+                    <p>夜晚温度：15°C</p>
+                </div>
+                <div class="weather-card">
+                    <h3>2025-06-01</h3>
+                    <p>白天温度：29°C</p>
+                    <p>夜晚温度：17°C</p>
+                </div>
+                <div class="weather-card">
+                    <h3>2025-06-02</h3>
+                    <p>白天温度：28°C</p>
+                    <p>夜晚温度：16°C</p>
+                </div>
+            </div>
+        </div>
+        <div class="tip-container">
+            <div class="tip-header">旅行小贴士</div>
+            <div class="tip-content">
+                <p>2025-05-31：白天有阵雨，建议携带雨具，注意出行安全。</p>
+                <p>2025-06-01：天气晴朗，适合户外活动，注意防晒。</p>
+                <p>2025-06-02：多云天气，适宜出行，建议早晚添衣保暖。</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="day">
+            <h2>第一天：故宫与天安门广场</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/ae0a73885ccb64f09b73adef515c8c28" alt="故宫博物院">
+                    <div>
+                        <h3>故宫博物院</h3>
+                        <p>建议游览时间：上午9点至中午12点</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/b2e84bbc07d56d5dc5e843a93a03061d" alt="天安门广场-国旗">
+                    <div>
+                        <h3>天安门广场-国旗</h3>
+                        <p>建议游览时间：下午2点至傍晚6点</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/e242ed1956e6d775a8912cfd3934169b" alt="恭王府博物馆">
+                    <div>
+                        <h3>恭王府博物馆</h3>
+                        <p>建议游览时间：晚上7点至晚上9点</p>
+                    </div>
+                </div>
+            </div>
+            <div class="taxi-link">
+                <a href="amapuri://drive/takeTaxi?sourceApplication=amapplatform&amp;slat=39.917839&amp;slon=116.397029&amp;sname=%E6%95%85%E5%AE%AB&amp;dlon=116.397755&amp;dlat=39.903179&amp;dname=%E5%A4%A9%E5%AE%89%E9%97%A8%E5%B9%BF%E5%9C%BA">从故宫到天安门广场打车</a>
+            </div>
+            <div class="taxi-link">
+                <a href="amapuri://drive/takeTaxi?sourceApplication=amapplatform&amp;slat=39.903179&amp;slon=116.397755&amp;sname=%E5%A4%A9%E5%AE%89%E9%97%A8%E5%B9%BF%E5%9C%BA&amp;dlon=116.395367&amp;dlat=39.917839&amp;dname=%E6%95%85%E5%BA%9C%E5%BA%9C%E5%8D%9A%E7%89%A9%E9%A6%86">从天安门广场到恭王府博物馆打车</a>
+            </div>
+        </div>
+        <div class="day">
+            <h2>第二天：八达岭长城与颐和园</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/73e202337e15794120c2004ef9ced36d" alt="八达岭长城">
+                    <div>
+                        <h3>八达岭长城</h3>
+                        <p>建议游览时间：上午8点至中午12点</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/415dba21b4b140c18dca5af366930b3a" alt="颐和园">
+                    <div>
+                        <h3>颐和园</h3>
+                        <p>建议游览时间：下午2点至傍晚6点</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/e3f95f17eb8064df27d48cfe725d4f9e" alt="北京奥林匹克公园">
+                    <div>
+                        <h3>北京奥林匹克公园</h3>
+                        <p>建议游览时间：晚上7点至晚上9点</p>
+                    </div>
+                </div>
+            </div>
+            <div class="taxi-link">
+                <a href="amapuri://drive/takeTaxi?sourceApplication=amapplatform&amp;slat=40.356188&amp;slon=116.016802&amp;sname=%E9%95%BF%E5%9F%8E&amp;dlon=116.275179&amp;dlat=39.999617&amp;dname=%E9%A2%90%E5%92%8C%E5%9B%AD">从长城到颐和园打车</a>
+            </div>
+            <div class="taxi-link">
+                <a href="amapuri://drive/takeTaxi?sourceApplication=amapplatform&amp;slat=39.999617&amp;slon=116.275179&amp;sname=%E9%A2%90%E5%92%8C%E5%9B%AD&amp;dlon=116.407433&amp;dlat=39.913456&amp;dname=%E5%8C%97%E4%BA%AC%E5%A5%A5%E6%9E%97%E5%85%AC%E5%9B%AD">从颐和园到北京奥林匹克公园打车</a>
+            </div>
+        </div>
+        <div class="day">
+            <h2>第三天：798艺术区与三里屯</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/42a5f4dfacfbf2d38d20905cdc15f5ff" alt="798艺术区">
+                    <div>
+                        <h3>798艺术区</h3>
+                        <p>建议游览时间：上午9点至中午12点</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://aos-comment.amap.com/B000A8ZH6N/comment/content_media_external_images_media_100015475_1734702722638_04606407.jpg" alt="三里屯">
+                    <div>
+                        <h3>三里屯</h3>
+                        <p>建议游览时间：下午3点至晚上7点</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="http://store.is.autonavi.com/showpic/5dfc698592bfa3ea0a942c4b09ee771a" alt="北京环球影城">
+                    <div>
+                        <h3>北京环球影城</h3>
+                        <p>建议游览时间：晚上8点至晚上10点</p>
+                    </div>
+                </div>
+            </div>
+            <div class="taxi-link">
+                <a href="amapuri://drive/takeTaxi?sourceApplication=amapplatform&amp;slat=39.983285&amp;slon=116.495027&amp;sname=798%E8%89%BA%E6%9C%AF%E5%8C%BA&amp;dlon=116.467890&amp;dlat=39.925432&amp;dname=%E4%B8%89%E9%87%8C%E5%B1%AF">从798艺术区到三里屯打车</a>
+            </div>
+            <div class="taxi-link">
+                <a href="amapuri://drive/takeTaxi?sourceApplication=amapplatform&amp;slat=39.997884&amp;slon=116.398700&amp;sname=%E5%8C%97%E4%BA%AC%E5%A5%A5%E6%9E%97%E5%85%AC%E5%9B%AD&amp;dlon=116.697245&amp;dlat=39.875427&amp;dname=%E5%8C%97%E4%BA%AC%E7%8E%AF%E7%90%83%E5%BD%B1%E5%9F%8E">从北京奥林匹克公园到北京环球影城打车</a>
+            </div>
+        </div>
+        <div id="map" class="amap-container" style="cursor: default; background-color: rgb(244, 244, 244);"><iframe style="width: 100%; height: 100%; position: absolute; opacity: 0; margin: 0px; padding: 0px; border: none;" src="javascript:void(0)"></iframe><div class="amap-maps" tabindex="0"><div class="amap-layers"><canvas class="amap-layer" width="1738" height="800" style="width: 869px; height: 400px;"></canvas><div class="amap-markers"><div class="amap-marker" title="故宫博物院" style="position: absolute; top: 103.128px; left: 209.751px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="天安门广场-国旗" style="position: absolute; top: 1955.65px; left: 280.121px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="恭王府博物馆" style="position: absolute; top: 103.128px; left: 48.6556px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="八达岭长城" style="position: absolute; top: -55473.7px; left: -36645.1px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="颐和园" style="position: absolute; top: -10238.1px; left: -11601px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="北京奥林匹克公园" style="position: absolute; top: -10018.8px; left: 371.719px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="798艺术区" style="position: absolute; top: -8171.85px; left: 9708.56px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="三里屯" style="position: absolute; top: 5461.47px; left: 29309.3px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="北京环球影城" style="position: absolute; top: 27936.9px; left: 29309.3px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"></div><div class="amap-marker" title="起点：第一天行程" style="position: absolute; top: 103.128px; left: 209.751px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"><div class="amap-marker-label" style="top: 5.5px; left: 19px;">起点</div></div><div class="amap-marker" title="终点：第一天行程" style="position: absolute; top: 103.128px; left: 48.6556px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"><div class="amap-marker-label" style="top: 5.5px; left: 19px;">终点</div></div><div class="amap-marker" title="起点：第二天行程" style="position: absolute; top: 103.128px; left: 48.6556px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"><div class="amap-marker-label" style="top: 5.5px; left: 19px;">起点</div></div><div class="amap-marker" title="终点：第二天行程" style="position: absolute; top: 657.031px; left: 1218.2px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"><div class="amap-marker-label" style="top: 5.5px; left: 19px;">终点</div></div><div class="amap-marker" title="起点：第三天行程" style="position: absolute; top: -8171.85px; left: 9708.56px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"><div class="amap-marker-label" style="top: 5.5px; left: 19px;">起点</div></div><div class="amap-marker" title="终点：第三天行程" style="position: absolute; top: 27936.9px; left: 29309.3px; transform-origin: 9.5px 32px; z-index: 12; display: block; pointer-events: auto; transform: translate(-9.5px, -32px) scale(1) rotate(0deg);"><img width="19px" height="32px" src="//webapi.amap.com/theme/v1.3/markers/b/mark_bs.png"><div class="amap-marker-label" style="top: 5.5px; left: 19px;">终点</div></div></div></div><div class="amap-overlays"></div></div><div class="amap-controls"></div><a class="amap-logo"><img src="https://webapi.amap.com/theme/v2.0/logo@2x.png"></a><div class="amap-copyright" style="display: none;"><!--v2.0--> © 2025 Amap <span class="amap-mcode">- GS(2024)1158号</span></div></div>
+    </div>
+    <footer>
+        <p>© 2025 北京旅行攻略</p>
+    </footer>
+
+    <!-- 高德地图 JS API -->
+    <script src="https://webapi.amap.com/maps?v=2.0&amp;key=d6576b41440c09244a2c32a34ed7f8c7"></script>
+    <script>
+        // 初始化地图
+        const map = new AMap.Map('map', {
+            zoom: 11, // 设置地图缩放级别
+            center: [116.4074, 39.9042] // 设置地图中心点
+        });
+
+        // 景点数据（经纬度和名称）
+        const attractions = [
+            { name: '故宫博物院', position: [116.397029, 39.917839] },
+            { name: '天安门广场-国旗', position: [116.397755, 39.903179] },
+            { name: '恭王府博物馆', position: [116.395367, 39.917839] },
+            { name: '八达岭长城', position: [116.016802, 40.356188] },
+            { name: '颐和园', position: [116.275179, 39.999617] },
+            { name: '北京奥林匹克公园', position: [116.398700, 39.997884] },
+            { name: '798艺术区', position: [116.495027, 39.983285] },
+            { name: '三里屯', position: [116.697245, 39.875427] },
+            { name: '北京环球影城', position: [116.697245, 39.697245] }
+        ];
+
+        // 添加标记
+        attractions.forEach(attraction => {
+            const marker = new AMap.Marker({
+                position: attraction.position,
+                title: attraction.name
+            });
+            map.add(marker);
+        });
+
+        // 每日行程路线数据
+        const dailyRoutes = [
+            {
+                name: '第一天行程',
+                color: '#FF33FF',
+                path: [
+                    [116.397029, 39.917839], // 故宫博物院
+                    [116.397755, 39.903179], // 天安门广场-国旗
+                    [116.395367, 39.917839]  // 恭王府博物馆（北京市东城区）
+                ]
+            },
+            {
+                name: '第二天行程',
+                color: '#1791fc',
+                path: [
+                    [116.395367, 39.917839], // 八达岭长城（北京市延庆区）
+                    [116.275179, 39.999617], // 颐和园
+                    [116.407433, 39.913456]  // 北京奥林匹克公园
+                ]
+            },
+            {
+                name: '第三天行程',
+                color: '#ff3300',
+                path: [
+                    [116.495027, 39.983285], // 798艺术区
+                    [116.467890, 39.925432], // 三里屯
+                    [116.697245, 39.697245]  // 北京环球影城（北京市通州区）
+                ]
+            }
+        ];
+
+        // 添加路线
+        dailyRoutes.forEach(route => {
+            const polyline = new AMap.Polyline({
+                path: route.path,
+                strokeColor: route.color,
+                strokeWeight: 6,
+                strokeStyle: 'dashed',
+                strokeDasharray: [10, 5]
+            });
+            map.add(polyline);
+
+            // 添加路线起点和终点标记
+            const startMarker = new AMap.Marker({
+                position: route.path[0],
+                title: `起点：${route.name}`,
+                label: { content: '起点' }
+            });
+            const endMarker = new AMap.Marker({
+                position: route.path[route.path.length - 1],
+                title: `终点：${route.name}`,
+                label: { content: '终点' }
+            });
+            map.add([startMarker, endMarker]);
+        });
+    </script>
+
+ </body>
+</html>

@@ -1,0 +1,5 @@
+pip install python-docx
+pip install chromadb
+pip install sentence-transformers==2.2.2 transformers==4.29.2 huggingface-hub==0.14.1 accelerate==0.20.3
+pip install posthog==2.4.2
+pip install chromadb==0.4.24

@@ -1,0 +1,66 @@
+[{
+    "showTrueCount": false,
+    "auctionNumId": "818729817867",
+    "pageNo": 1,
+    "pageSize": 20,
+    "rateType": "",
+    "searchImpr": "-8",
+    "orderType": "",
+    "expression": "",
+    "rateSrc": "pc_rate_list"
+},{
+        "id": "",
+        "detail_v": "3.3.2",
+        "exParams": {
+            "id": "",
+            "pvid": "d5b79019-b36e-4dcc-a5c4-34c4598799cf",
+            "scm": "1007.40986.436100.0",
+            "skuId": "5733927185229",
+            "spm": "a21bo.jianhua/a.201876.d3.5af92a89hcH0RY",
+            "utparam": {
+                "abid": "0",
+                "item_ctr": 0,
+                "x_object_type": "item",
+                "pc_pvid": "d5b79019-b36e-4dcc-a5c4-34c4598799cf",
+                "item_cvr": 0,
+                "mix_group": "",
+                "pc_scene": "20001",
+                "item_ecpm": 0,
+                "aplus_abtest": "c7f1ddcc5d5521b8156424283633b02e",
+                "tpp_buckets": "30986#436100#module",
+                "x_object_id": "{data2}",
+                "ab_info": "30986#436100#-1#"
+            },
+            "xxc": "home_recommend",
+            "queryParams": {
+                "id": "887862383399",
+                "ltk2": "1748611189386elbt9pt1fc7f5ds9tuk8l9",
+                "pvid": "d5b79019-b36e-4dcc-a5c4-34c4598799cf",
+                "scm": "1007.40986.436100.0",
+                "skuId": "5733927185229",
+                "spm": "a21bo.jianhua/a.201876.d3.5af92a89hcH0RY",
+                "utparam": {
+                    "abid": "0",
+                    "item_ctr": 0,
+                    "x_object_type": "item",
+                    "pc_pvid": "d5b79019-b36e-4dcc-a5c4-34c4598799cf",
+                    "item_cvr": 0,
+                    "mix_group": "",
+                    "pc_scene": "20001",
+                    "item_ecpm": 0,
+                    "aplus_abtest": "c7f1ddcc5d5521b8156424283633b02e",
+                    "tpp_buckets": "30986#436100#module",
+                    "x_object_id": "{data2}",
+                    "ab_info": "30986#436100#-1#"
+                },
+                "xxc": "home_recommend"
+            },
+            "domain": "https://item.taobao.com",
+            "path_name": "/item.htm",
+            "pcSource": "pcTaobaoMain",
+            "appKey": "3q2+7wX9z8JkLmN1oP5QrStUvWxYzA0B",
+            "refId": "3Z8vN3/chgDu9ldd7mq7DEebCMeqk5Ch+wYsLEIynE4=",
+            "nonce": "u1ukFbEJ8DIxN/RX65QOCA=="
+        }
+    }]
+

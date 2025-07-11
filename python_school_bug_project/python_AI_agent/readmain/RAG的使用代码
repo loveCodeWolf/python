@@ -1,0 +1,370 @@
+from sentence_transformers import SentenceTransformer
+import chromadb
+import os
+import docx # 导入 python-docx 库
+
+# --- 配置 --- 
+# 修改知识库源文件指向你的 .docx 文件
+KNOWLEDGE_SOURCE_FILE = "./my_knowledge_collection/网络安全产品（V3.0）-5.15.docx" 
+# 或者你可以配置一个文件夹，然后遍历其中的 .docx 文件
+# KNOWLEDGE_SOURCE_DIR = "./my_knowledge_collection/"
+
+CHROMA_DB_PATH = "./my_chroma_db"  # ChromaDB数据存储路径
+COLLECTION_NAME = "my_knowledge_collection" # 知识库集合名称
+EMBEDDING_MODEL_NAME = './local_m3e_base_model' # 指向你的本地模型文件夹
+
+def load_documents_from_docx(file_path):
+    """从单个 .docx 文件加载文档内容，将每个段落视为一个文档块"""
+    docs = []
+    if os.path.exists(file_path) and file_path.endswith('.docx'):
+        try:
+            document = docx.Document(file_path)
+            for para in document.paragraphs:
+                if para.text.strip(): # 只添加非空段落
+                    docs.append(para.text.strip())
+            print(f"Successfully loaded {len(docs)} paragraphs from {file_path}")
+        except Exception as e:
+            print(f"Error loading docx file {file_path}: {e}")
+    else:
+        print(f"Warning: Knowledge source file '{file_path}' not found or not a .docx file.")
+    return docs
+
+# 如果你希望从一个文件夹加载所有 .docx 文件
+def load_all_docx_from_directory(dir_path):
+    all_docs = []
+    if os.path.isdir(dir_path):
+        for filename in os.listdir(dir_path):
+            if filename.endswith(".docx"):
+                file_path = os.path.join(dir_path, filename)
+                docs_from_file = load_documents_from_docx(file_path)
+                all_docs.extend(docs_from_file)
+        print(f"Loaded a total of {len(all_docs)} paragraphs from .docx files in {dir_path}")
+    else:
+        print(f"Warning: Knowledge source directory '{dir_path}' not found.")
+    return all_docs
+
+
+def main():
+    print(f"Loading embedding model: {EMBEDDING_MODEL_NAME}...")
+    model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+
+    print(f"Initializing ChromaDB client at {CHROMA_DB_PATH}...")
+    client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
+
+    print(f"Getting or creating collection: {COLLECTION_NAME}...")
+    try:
+        collection = client.get_collection(name=COLLECTION_NAME)
+        # 如果希望每次都清空并重建，可以取消下面的注释
+        # print(f"Collection '{COLLECTION_NAME}' exists. Deleting and recreating.")
+        # client.delete_collection(name=COLLECTION_NAME)
+        # collection = client.create_collection(name=COLLECTION_NAME)
+    except:
+        collection = client.create_collection(name=COLLECTION_NAME)
+
+    print("Loading documents from source...")
+    # 根据你的配置选择加载方式
+    documents = load_documents_from_docx(KNOWLEDGE_SOURCE_FILE)
+    # 或者，如果你配置了 KNOWLEDGE_SOURCE_DIR 并想加载目录下所有docx:
+    # documents = load_all_docx_from_directory(KNOWLEDGE_SOURCE_DIR)
+
+    if not documents:
+        print("No documents to process. Exiting.")
+        return
+
+    print(f"Generating embeddings for {len(documents)} documents...")
+    embeddings = model.encode(documents, show_progress_bar=True)
+
+    ids = [f"doc_{i}" for i in range(len(documents))]
+
+    print("Adding documents to ChromaDB...")
+    collection.add(
+        embeddings=embeddings.tolist(),
+        documents=documents,
+        ids=ids
+    )
+    print(f"Successfully added/updated {collection.count()} documents in '{COLLECTION_NAME}'.")
+
+if __name__ == "__main__":
+    main()
+
+
+import requests
+import json
+from get_weather import get_weather
+from get_dbData import get_dbData
+from get_item import get_item_compare
+
+# RAG 相关导入
+from sentence_transformers import SentenceTransformer
+import chromadb
+import os
+
+# --- RAG 配置 ---
+CHROMA_DB_PATH = "./my_chroma_db"  # 必须与 build_knowledge_base.py 中的路径一致
+COLLECTION_NAME = "my_knowledge_collection" # 必须与 build_knowledge_base.py 中的名称一致
+EMBEDDING_MODEL_NAME = 'moka-ai/m3e-base' # 必须与 build_knowledge_base.py 中的模型一致
+KNOWLEDGE_RETRIEVAL_TOP_K = 3 # 检索多少条最相关的知识
+
+# --- 全局初始化 RAG 组件 (避免每次调用都加载) ---
+ragg_embedding_model = None
+ragg_knowledge_collection = None
+try:
+    if os.path.exists(CHROMA_DB_PATH):
+        print(f"Loading RAG embedding model: {EMBEDDING_MODEL_NAME}...")
+        ragg_embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+        print(f"Initializing RAG ChromaDB client from {CHROMA_DB_PATH}...")
+        chroma_client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
+        ragg_knowledge_collection = chroma_client.get_collection(name=COLLECTION_NAME)
+        print(f"RAG ChromaDB collection '{COLLECTION_NAME}' loaded with {ragg_knowledge_collection.count()} documents.")
+    else:
+        print(f"Warning: ChromaDB path '{CHROMA_DB_PATH}' not found. RAG features will be disabled.")
+except Exception as e:
+    print(f"Error initializing RAG components: {e}. RAG features might be disabled.")
+    ragg_embedding_model = None
+    ragg_knowledge_collection = None
+
+
+messages = [] # 保持你原有的对话历史
+
+def retrieve_from_knowledge_base(query_text):
+    """从向量知识库中检索相关信息"""
+    if not ragg_embedding_model or not ragg_knowledge_collection:
+        return [] # RAG未初始化则不进行检索
+    try:
+        query_embedding = ragg_embedding_model.encode(query_text).tolist()
+        results = ragg_knowledge_collection.query(
+            query_embeddings=[query_embedding],
+            n_results=KNOWLEDGE_RETRIEVAL_TOP_K,
+            include=['documents'] # 我们只需要文档内容
+        )
+        # results['documents'] 是一个列表的列表，因为可以批量查询
+        # 对于单个查询，我们取第一个列表
+        retrieved_docs = results['documents'][0] if results['documents'] and results['documents'][0] else []
+        print(f"Retrieved {len(retrieved_docs)} snippets from knowledge base for query: '{query_text}'")
+        return retrieved_docs
+    except Exception as e:
+        print(f"Error during knowledge base retrieval: {e}")
+        return []
+
+def tongyi_chat(content, url, key):
+    global messages
+
+    # 1. RAG: 从知识库检索相关信息
+    retrieved_snippets = retrieve_from_knowledge_base(content)
+
+    # 2. RAG: 构建增强的 Prompt
+    # 用户的原始问题仍然是主要的，知识片段作为补充上下文
+    api_messages = []
+    
+    # 你可以调整 system prompt 来指导模型如何使用知识
+    system_message_content = "你是一个智能助手。请参考以下可能相关的背景知识来回答用户的问题。如果背景知识与问题无关，请忽略它们并正常回答。"
+    api_messages.append({"role": "system", "content": system_message_content})
+
+    if retrieved_snippets:
+        knowledge_prompt_part = "背景知识参考：\n"
+        for i, snippet in enumerate(retrieved_snippets):
+            knowledge_prompt_part += f"{i+1}. {snippet}\n"
+        # 将知识和问题组合，可以放在一个 user message 里，或者知识作为 system/assistant message
+        # 这里选择将知识作为用户提问的一部分前缀
+        api_messages.append({"role": "user", "content": knowledge_prompt_part + "\n用户问题：" + content})
+    else:
+        api_messages.append({"role": "user", "content": content}) # 没有知识，直接提问
+    
+    # 如果你的模型支持多轮对话，并且你希望它记住之前的RAG上下文，
+    # 你需要更复杂地管理 messages 列表，将之前的对话历史（包括可能已注入的知识）也传给API。
+    # 为简单起见，此示例中每次API调用都基于当前问题和新检索的知识构建 api_messages。
+    # 但全局的 `messages` 列表仍然用于维护用户和助手之间的完整对话历史。
+
+    payload = {
+        "model": "Qwen/Qwen3-8B",
+        "messages": api_messages, # 使用为API构建的messages
+        "stream": False,
+        "max_tokens": 1024, # 可能需要增加max_tokens以容纳知识和答案
+        "enable_thinking": True,
+        "thinking_budget": 4096,
+        "min_p": 0.05,
+        "stop": [],
+        "temperature": 0.7,
+        "top_p": 0.7,
+        "top_k": 50,
+        "frequency_penalty": 0.5,
+        "n": 1,
+        "response_format": {"type": "text"},
+        "tools": [ # 你原有的 tools 定义
+            {
+                "type": "function",
+                "function": {
+                    "description": "获取指定城市的详细天气信息",
+                    "name": "get_weather",
+                    "parameters": {
+                        "city" :{
+                            "type": "string",
+                            "description": "城市名称"
+                        }
+                    },
+                    "strict": True
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "description": "对指定数据库进行操作，如果是不同的数据库则需要多次调用这个函数，但如果是同一个数据库的操作的话就执行一次就好",
+                    "name": "get_dbData",
+                    "parameters": {
+                        "databaseName": {
+                            "type": "string",
+                            "description": "数据库名"
+                        },
+                        "tableName": {
+                            "type": "array",
+                            "items": { "type": "string" },
+                            "description": "表名（这里将需要操作的表名一一放入这个数组中）"
+                        },
+                        "measures": {
+                            "type": "array",
+                            "items": { "type": "string" },
+                            "description": "对于mysql数据库的sql操作代码（按顺序一条条放入进去）"
+                        }
+                    },
+                    "strict": True
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "description": "对输入的淘宝和天猫的商品链接进行获取其中的id的参数，网址的例子如'https://item.taobao.com/item.htm?id=887862383399'",
+                    "name": "get_item_compare",
+                    "parameters": {
+                        "file_path": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "如果用户输入的要求是几个类似于‘https://item.taobao.com/item.htm?id=887862383399’这样的链接地址让你进行比较或者进行介绍一下这几个商品，你就将这几个链接中的id的参数放入这个数组中"
+                        },
+                        "measures": {
+                            "type": "int",
+                            "description": "对淘宝商品链接网址的操作，如果是要进行比较的话在这里的参数中输入1、如果是要进行介绍这几个商品的链接的话输入2"
+                        }
+                    },
+                    "strict": True
+                }
+            },
+        ]
+    }
+    headers = {
+        "Authorization": "Bearer "+key,
+        "Content-Type": "application/json"
+    }
+
+    response = requests.request("POST", url, json=payload, headers=headers)
+
+    result = response.json()
+    print("API Raw Response:", result) # 调试用
+
+    if "choices" not in result or not result["choices"]:
+        print("Error: API response does not contain 'choices'.")
+        # 即使API出错，也记录用户的原始提问
+        messages.append({"role": "user", "content": content})
+        error_response = "抱歉，调用模型时发生错误，未能获取回复。"
+        messages.append({"role": "assistant", "content": error_response})
+        return error_response
+
+    message_from_model = result["choices"][0]["message"]
+    
+    # 将用户的原始提问（不含注入的知识）添加到全局对话历史
+    messages.append({"role": "user", "content": content})
+
+    # 处理 tool_calls (如果模型决定调用工具)
+    # 注意：如果模型调用工具，它看到的上下文是包含注入知识的
+    end_chat_push = call_function(message_from_model) # call_function 内部会更新全局 messages
+    return end_chat_push
+
+
+#这里的是处理tools中有输出的情况,来调用外部的tools
+def call_function(message):
+    # 判断是否有 tool_calls，进行方法的调用
+    entire_ResponseText = ''
+    if "tool_calls" in message and message["tool_calls"]:
+        for call in message["tool_calls"]:
+            function_name = call["function"]["name"]
+            args_str = call["function"]["arguments"]
+            args = json.loads(args_str)
+            
+            tool_response_content = ""
+            tool_used_info = ""
+
+            if function_name == "get_weather":
+                city = args["city"]
+                tool_name, weather_info = get_weather(city)
+                tool_response_content = weather_info
+                tool_used_info = f"调用 get_weather({city}) 使用了：{tool_name}大模型，结果：{weather_info}"
+            elif function_name == "get_dbData":
+                databaseName = args["databaseName"]
+                tableName = args["tableName"]
+                measures_list = args["measures"]
+                tool_name, db_data = get_dbData(databaseName, tableName, measures_list)
+                tool_response_content = db_data
+                tool_used_info = f"调用 get_dbData({databaseName}, {tableName}, {measures_list}) 使用了：{tool_name}大模型，结果：{db_data}"
+            elif function_name == "get_item_compare":
+                file_paths = args["file_path"]
+                measure_code = args["measures"]
+                tool_name, thinking_process, product_reason = get_item_compare(file_paths, measure_code)
+                tool_response_content = product_reason # 或者包含 thinking_process
+                tool_used_info = f"调用 get_item_compare({file_paths}, {measure_code}) 使用了：{tool_name}大模型，推荐原因：{product_reason}"
+            else:
+                tool_used_info = f"未知的工具函数调用: {function_name}"
+                tool_response_content = "无法处理此工具调用。"
+
+            # 将工具调用的结果反馈给模型（如果需要多轮工具调用）或直接作为最终回复的一部分
+            # 根据 SiliconFlow 的文档，工具调用的结果应该作为新的 assistant message 发回
+            # 这里我们简化处理，直接将工具执行信息加入到 entire_ResponseText
+            # 并且将工具的直接输出（tool_response_content）加入到全局 messages 的 assistant 回复中
+            messages.append({
+                "role": "tool", 
+                "tool_call_id": call['id'], 
+                "name": function_name, 
+                "content": tool_response_content
+            })
+            entire_ResponseText += tool_used_info + "\n"
+        
+        # 如果有工具调用，通常需要将工具结果再发给模型获取最终回复
+        # 但你当前的设计是直接返回工具执行的总结，这里保持这个逻辑
+        # 如果要让模型基于工具结果再总结，需要再次调用 tongyi_chat (或类似API)
+        # 并将 role:tool 的消息加入到 api_messages 中
+        final_summary = "工具调用执行完毕。\n" + entire_ResponseText
+        messages.append({"role": "assistant", "content": final_summary}) # 记录助手对工具调用的总结
+        return final_summary
+    else:
+        ai_response = message.get("content", "")
+        messages.append({"role": "assistant", "content": ai_response})
+        return "没有调用任何工具，模型直接给出了回答：\n"+ ai_response
+
+# ... (song_toText 函数保持不变)
+
+if __name__ == '__main__':
+    url_chats = "https://api.siliconflow.cn/v1/chat/completions"
+    # url_image = "https://api.siliconflow.cn/v1/images/generations"
+    # url_song = "https://api.siliconflow.cn/v1/audio/transcriptions"
+
+    key = "sk-wrilwzaclgftxgshxeienqtsjjmuqegomwhqeiskkmevvcpb" # 请替换为你的真实API Key
+    # content = "" # content 在循环内获取
+
+    # 初始的 system prompt，现在由 tongyi_chat 内部的 system_message_content 处理
+    # 但可以保留一个通用的 system prompt 在全局 messages 中，如果 tongyi_chat 不覆盖它的话
+    # messages.append({"role": "system", "content": "你是一个乐于助人的AI助手。"})
+    
+    print("AI助手已启动。输入 'exit' 退出。")
+    while True:
+        user_input_content = input("\n请输入你的问题：")
+        if user_input_content.lower() == 'exit':
+            print("再见!")
+            break
+        if not user_input_content.strip():
+            continue
+
+        result_text = tongyi_chat(user_input_content, url_chats, key)
+        print("\nAI回复:")
+        print(result_text)
+        # print("\n--- 对话历史 (messages) ---")
+        # for msg in messages:
+        #     print(f"  {msg['role']}: {msg['content'][:100]}...") # 打印部分内容
+        # print("--------------------------")
